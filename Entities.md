@@ -1,7 +1,7 @@
 # Entities
 
 ## Case Diagram
-![BookNow](pictures/CaseDiagram.jpg)
+![BookNow](Diagrams/CaseDiagram.jpg)
 
 Entities in the BookNow application I have describes their roles and attributes.
 

@@ -2,7 +2,7 @@
 
 
 ## Case Diagram
-![BookNow](pictures/CaseDiagram.jpg)
+![BookNow](Diagrams/CaseDiagram.jpg)
 
 ## Non-functional Requirements
 
@@ -23,21 +23,22 @@ file to be easily executed on any system that has the Java Runtime Environment (
 
 ## Functional Requirements
 
-### **Use Case 1: Create a Reservation**
+### **Use Case 1: Pick a Reservation**
 - **Actors**: Customer
-- **Use case goal**: Allow customers to create a reservation.
+- **Use case goal**: Allow customers to pick an existing reservation time for a selected restaurant.
 - **Primary Actor**: Customer
-- **Preconditions**: Customer must be logged in, restaurant data must be available.
+- **Preconditions**: Customer must be logged in, restaurant data and available reservation times must be available.
 - **Basic flow**:
-    1. Customer selects a restaurant, Cuisine, location, date, time, and number of guests.
-    2. Customer confirms the reservation.
-    3. System records the reservation.
-    4. Customer receives confirmation.
-- **Alternative flow 1**: Customer cancels reservation. 
-  * The system discards the entered data and returns the customer to the main dashboard.
-  - **Alternative flow 2**: System alerts customer if the time slot is unavailable.
-  * If the customer selects a time that is already booked. The system displays an alert to
-the customer informing them of the unavailability and suggests alternative time slots.
+    1. Customer selects a restaurant, cuisine, location, date, time, and number of guests.
+    2. Customer picks an available reservation time.
+    3. System displays the selected reservation details.
+    4. Customer confirms the reservation.
+    5. System records the reservation.
+    6. Customer receives confirmation.
+- **Alternative flow 1**: Customer cancels the reservation process.
+    * The system discards the selected data and returns the customer to the main dashboard.
+- **Alternative flow 2**: System alerts the customer if the selected time slot is unavailable.
+    * If the customer selects a time that is already booked, the system displays an alert informing them of the unavailability and suggests alternative time slots.
 
 ### **Use Case 2: Sign Up for an Account**
 - **Actors**: New User

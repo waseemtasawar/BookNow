@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.metrostate.edu.booknow.controllers.BookNowController">
+    <children>
+        <!-- Top blue background -->
+        <Pane prefHeight="200" prefWidth="1200" style="-fx-background-color: #003580;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <!-- Welcome label properly aligned to the right -->
+                <Label fx:id="lbl_welcome" prefHeight="25.0" prefWidth="116.0" style="-fx-font-size: 16px; -fx-text-fill: white;" text="Welcome, User" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
+
+                <!-- Main content -->
+                <Label layoutX="34.0" layoutY="97.0" style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: white;" text="Find your restaurant" />
+
+                <!-- Location dropdown -->
+                <ComboBox fx:id="locationComboBox" layoutX="34.0" layoutY="150.0" prefWidth="250" promptText="Where are you going?">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Minneapolis" />
+                            <String fx:value="Saint Paul" />
+                            <String fx:value="Bloomington" />
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+
+                <!-- Date picker for check-in -->
+                <DatePicker fx:id="checkInDate" layoutX="574.0" layoutY="150.0" prefWidth="200" promptText="Check-in Date" />
+
+                <!-- Custom Guests and Children Selector -->
+                <Button fx:id="guestButton" layoutX="789.0" layoutY="150.0" onAction="#onGuestButtonAction" prefWidth="200" text="1 adult · 0 children" />
+
+                <!-- Search button -->
+                <Button layoutX="1007.0" layoutY="150.0" mnemonicParsing="false" onAction="#onSearchButtonClick" style="-fx-background-color: #ff9900; -fx-text-fill: white;" text="Search" />
+
+                <!-- Cuisine type dropdown -->
+                <ComboBox fx:id="cb_cuisineType" layoutX="306.0" layoutY="150.0" prefWidth="250" promptText="Cuisine Type">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Italian" />
+                            <String fx:value="Chinese" />
+                            <String fx:value="Indian" />
+                            <String fx:value="Mexican" />
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+
+                <!-- Rating dropdown -->
+                <ComboBox fx:id="cb_rating" layoutX="34.0" layoutY="200.0" prefWidth="250" promptText="Rating">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="1" />
+                            <String fx:value="2" />
+                            <String fx:value="3" />
+                            <String fx:value="4" />
+                            <String fx:value="5" />
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+
+                <!-- Price Range dropdown -->
+                <ComboBox fx:id="cb_priceRange" layoutX="306.0" layoutY="200.0" prefWidth="250" promptText="Price Range">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="$" />
+                            <String fx:value="$$" />
+                            <String fx:value="$$$" />
+                            <String fx:value="$$$$" />
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+
+                <!-- Restaurant dropdown -->
+                <ComboBox fx:id="restaurantComboBox" layoutX="574.0" layoutY="200.0" prefWidth="250" promptText="Select a Restaurant" onAction="#onRestaurantSelected" />
+            </children>
+        </Pane>
+
+        <!-- Dividing line -->
+        <Line endX="1200" endY="200" startX="0" startY="200" stroke="black" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+
+        <!-- Bottom white section for displaying restaurants with scroll pane -->
+        <ScrollPane style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="200.0">
+            <content>
+                <VBox fx:id="restaurantListVBox" style="-fx-spacing: 20;">
+                    <padding>
+                        <Insets bottom="10" left="10" right="10" top="10" />
+                    </padding>
+                </VBox>
+            </content>
+        </ScrollPane>
+
+        <!-- Guests Selector Dropdown -->
+        <VBox fx:id="guestSelectionVBox" layoutX="527.0" layoutY="180.0" spacing="10" style="-fx-background-color: white; -fx-border-color: black; -fx-padding: 10;" visible="false">
+            <children>
+                <HBox spacing="10">
+                    <Label text="Adults" />
+                    <Button onAction="#decreaseAdults" text="-" />
+                    <Label fx:id="adultsLabel" text="1" />
+                    <Button onAction="#increaseAdults" text="+" />
+                </HBox>
+                <HBox spacing="10">
+                    <Label text="Children" />
+                    <Button onAction="#decreaseChildren" text="-" />
+                    <Label fx:id="childrenLabel" text="0" />
+                    <Button onAction="#increaseChildren" text="+" />
+                </HBox>
+            </children>
+        </VBox>
+
+        <!-- Availability VBox to display available times -->
+        <VBox fx:id="availabilityVBox" layoutX="34.0" layoutY="400.0" spacing="10" visible="false" style="-fx-background-color: white; -fx-padding: 10;">
+            <!-- This section will be populated dynamically by the controller -->
+        </VBox>
+
+        <!-- Confirm and Cancel Reservation Buttons -->
+        <HBox spacing="20" layoutX="600.0" layoutY="500.0" visible="true">
+            <!-- Confirm Reservation Button -->
+            <Button fx:id="confirmReservationButton" text="Confirm Reservation" onAction="#onConfirmReservation" />
+
+            <!-- Cancel Reservation Button -->
+            <Button fx:id="cancelReservationButton" text="Cancel Reservation" onAction="#onCancelReservation" />
+        </HBox>
+
+        <!-- Leave a Review Button -->
+        <Button fx:id="leaveReviewButton" layoutX="600.0" layoutY="550.0" text="Leave a Review" visible="false" />
+    </children>
+</AnchorPane>
