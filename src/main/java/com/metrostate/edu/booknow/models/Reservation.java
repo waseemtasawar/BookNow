@@ -3,15 +3,13 @@ package com.metrostate.edu.booknow.models;
 import java.time.LocalDateTime;
 
 public class Reservation {
-    private int reservationId;
     private Customer customer;
     private Restaurant restaurant;
     private LocalDateTime reservationDateTime;
     private int numberOfGuests;
 
     // Constructor
-    public Reservation(int reservationId, Customer customer, Restaurant restaurant, LocalDateTime reservationDateTime, int numberOfGuests) {
-        this.reservationId = reservationId;
+    public Reservation(Customer customer, Restaurant restaurant, LocalDateTime reservationDateTime, int numberOfGuests) {
         this.customer = customer;
         this.restaurant = restaurant;
         this.reservationDateTime = reservationDateTime;
@@ -19,14 +17,6 @@ public class Reservation {
     }
 
     // Getters and setters
-    public int getReservationId() {
-        return reservationId;
-    }
-
-    public void setReservationId(int reservationId) {
-        this.reservationId = reservationId;
-    }
-
     public Customer getCustomer() {
         return customer;
     }

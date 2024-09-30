@@ -1,22 +1,28 @@
 package com.metrostate.edu.booknow.utils;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnection {
 
-    private static String url;
-    private static String username;
-    private static String password;
+    // Database connection details
+    private static String url = "";
+    private static String username = "";
+    private static String password = "";
 
-    static {
-        // Static initializer block (no logic yet)
-        // Placeholder for loading database configuration
-    }
-
-    // Method to establish the connection (no logic yet)
+    // Method to establish the connection to the MySQL database
     public static Connection connect() throws SQLException {
-        // Placeholder for establishing a database connection
-        return null;
+        Connection connection = null;
+        try {
+            // Establish the connection to the MySQL database
+            connection = DriverManager.getConnection(url, username, password);
+            System.out.println("Connection to MySQL database successful!");
+        } catch (SQLException e) {
+            System.out.println("Failed to connect to MySQL database.");
+            e.printStackTrace();
+            throw e;  // Rethrow the exception so the calling method knows the connection failed
+        }
+        return connection;
     }
 }

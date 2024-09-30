@@ -11,7 +11,7 @@ public class BookNow extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(BookNow.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 1200, 600);
         stage.setTitle("BookNow!");
         stage.setScene(scene);
         stage.show();

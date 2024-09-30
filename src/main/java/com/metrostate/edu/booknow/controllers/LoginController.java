@@ -16,31 +16,28 @@ public class LoginController {
 
     private AuthenticationService authenticationService = new AuthenticationService();
 
-    // Called when the user presses the "Login" button
     @FXML
     public void onLoginButtonAction() {
-        String username = tf_username.getText();
-        String password = pf_password.getText();
-
-        if (username.isEmpty() || password.isEmpty()) {
-            Alerts.showErrorAlert("Error", "Please fill in both fields.");
-            return;
+        if (validateInput()) {
+            boolean isAuthenticated = authenticationService.authenticate(tf_username.getText(), pf_password.getText());
+            handleLoginResult(isAuthenticated);
         }
-        boolean isAuthenticated = authenticationService.authenticate(username, password);
-        displayLoginResult(isAuthenticated);
     }
 
-    // Displays the result of the login attempt
-    public void displayLoginResult(boolean success) {
-        if (success) {
+    private boolean validateInput() {
+        if (tf_username.getText().isEmpty() || pf_password.getText().isEmpty()) {
+            Alerts.showErrorAlert("Error", "Please fill in both fields.");
+            return false;
+        }
+        return true;
+    }
+
+    private void handleLoginResult(boolean isAuthenticated) {
+        if (isAuthenticated) {
             Alerts.showInfoAlert("Success", "Login successful!");
+            // Navigate to BookNowView
         } else {
             Alerts.showErrorAlert("Error", "Invalid username or password.");
         }
-    }
-
-    // when the user presses the "Create New Account" button
-    @FXML
-    public void onCreateAccountButtonAction() {
     }
 }

@@ -1,99 +1,120 @@
 # Requirements
 
 
-## Case Diagram
-![BookNow](Diagrams/CaseDiagram.jpg)
+## Use Case Diagram
+![Use Case Diagram](Diagrams/CaseDiagram.jpg)
 
-## Non-functional Requirements
+## Non-Functional Requirements
 
-1. **Performance**:
-    - *Explanation*: The application should quickly return search results and manage user inputs without delay.
-    - *Implementation*: Implement database indexing and optimize SQL queries to speed up the search for restaurants based on location, cuisine type, and other filters.
+### Performance
+- **Explanation**: The application should quickly return search results and manage user inputs without delay.
+- **Implementation**:
+    1. Implement database indexing.
+    2. Optimize SQL queries to speed up the search for restaurants based on location, cuisine type, and other filters.
 
-2. **Portability**:
-    - *Explanation*: The application should be able to run on different operating systems (Windows, macOS, Linux) without needing significant changes to the codebase.
-    - *Implementation*: Since the application is written in Java, it will leverage Java's "write once, run anywhere" (WORA) principle. The application will be built into an executable JAR 
-file to be easily executed on any system that has the Java Runtime Environment (JRE) installed.
+### Portability
+- **Explanation**: The application should be able to run on different operating systems (Windows, macOS, Linux) without needing significant changes to the codebase.
+- **Implementation**:
+    1. Leverage Java's "write once, run anywhere" (WORA).
+    2. Build the application into an executable JAR to be easily executed on any system with the Java Runtime Environment (JRE) installed.
 
-3. **Usability**:
-    - *Explanation*: The interface should be intuitive and user-friendly, enabling users to quickly navigate the app.
-    - *Implementation*: Create a clean, minimalist design with helpful tooltips, responsive error handling, and user feedback mechanisms.
-
----
+### Usability
+- **Explanation**: The interface will be intuitive and user-friendly, enabling users to quickly navigate the application.
+- **Implementation**:
+    1. Create a clean, minimalist design.
+    2. Add helpful tooltips.
+    3. Implement responsive error handling.
+    4. Provide user feedback mechanisms.
 
 ## Functional Requirements
 
-### **Use Case 1: Pick a Reservation**
-- **Actors**: Customer
-- **Use case goal**: Allow customers to pick an existing reservation time for a selected restaurant.
-- **Primary Actor**: Customer
-- **Preconditions**: Customer must be logged in, restaurant data and available reservation times must be available.
+### **Use Case 1: User Authentication**
+- **Actors**: New User, Existing User
+- **Use case goal**: Allow users to create new accounts and log in to access the application.
+- **Primary Actor**: User
+- **Preconditions**:
+  - New users must not be registered.
+  - Existing users must have valid credentials.
 - **Basic flow**:
-    1. Customer selects a restaurant, cuisine, location, date, time, and number of guests.
-    2. Customer picks an available reservation time.
-    3. System displays the selected reservation details.
-    4. Customer confirms the reservation.
-    5. System records the reservation.
-    6. Customer receives confirmation.
-- **Alternative flow 1**: Customer cancels the reservation process.
-    * The system discards the selected data and returns the customer to the main dashboard.
-- **Alternative flow 2**: System alerts the customer if the selected time slot is unavailable.
-    * If the customer selects a time that is already booked, the system displays an alert informing them of the unavailability and suggests alternative time slots.
-
-### **Use Case 2: Sign Up for an Account**
-- **Actors**: New User
-- **Use case goal**: Create a new user account.
-- **Primary Actor**: New User
-- **Preconditions**: The new user is not already registered.
-- **Basic flow**:
-    1. User enters a username, password, and confirmation password.
-    2. System validates the input.
-    3. User is added to the database and logged in.
-- **Alternative flow 1**: User enters mismatched passwords.
-- **Alternative flow 2**: Username is already taken.
-
-### **Use Case 3: Search Restaurants**
-- **Actors**: Customer
-- **Use case goal**: Search for restaurants based on location, cuisine type, etc.
-- **Primary Actor**: Customer
-- **Preconditions**: Restaurants must be registered in the system.
-- **Basic flow**:
-    1. Customer selects filters (location, cuisine type, etc.).
-    2. The system returns a list of matching restaurants.
-- **Alternative flow 1**: No restaurants match the search criteria.
-
-### **Use Case 4: Leave a Review**
-- **Actors**: Customer
-- **Use case goal**: Allow customers to leave reviews after visiting a restaurant.
-- **Primary Actor**: Customer
-- **Preconditions**: Customer must have visited the restaurant and made a reservation.
-- **Basic flow**:
-    1. Customer selects a past reservation.
-    2. Customer leaves a review and a rating.
-    3. System saves the review and updates the restaurant’s rating.
-- **Alternative flow 1**: The customer cancels before submitting the review.
-
-### **Use Case 5: View Reservation History**
-- **Actors**: Customer
-- **Use case goal**: Allow customers to view past reservations.
-- **Primary Actor**: Customer
-- **Preconditions**: Customer must be logged in.
-- **Basic flow**:
-    1. Customer navigates to their account page.
-    2. Customer views the list of previous reservations.
-- **Alternative flow 1**: No past reservations exist.
-
-### **Use Case 6: Cancel Reservation**
-- **Actors**: Customer
-- **Use case goal**: Allow customers to cancel a reservation.
-- **Primary Actor**: Customer
-- **Preconditions**: A valid reservation must exist.
-- **Basic flow**:
-    1. Customer selects a future reservation.
-    2. Customer cancels the reservation.
-    3. System updates the reservation status.
-- **Alternative flow 1**: Reservation is not cancellable (e.g., within a restricted time window).
+  1. If the user is a new user:
+  - User enters a username and password to create an account.
+  - System validates the input and checks for existing usernames.
+  - If valid, the user account is created, and the user is automatically logged in.
+  2. If the user is an existing user:
+  - User enters their username and password.
+  - System validates the credentials and logs the user in.
+- **Alternative flows**:
+  - **Alternative flow 1**: User enters mismatched passwords when creating an account.
+  - **Alternative flow 2**: Username is already taken when creating a new account.
+  - **Alternative flow 3**: Invalid credentials when logging in.
 
 ---
 
+### **Use Case 2: Search Restaurants**
+- **Actors**: Customer
+- **Use case goal**: Allow customers to search for restaurants based on location, cuisine type, and reservation time.
+- **Primary Actor**: Customer
+- **Preconditions**: Restaurants must be registered in the database.
+- **Basic flow**:
+  1. Customer navigates to the search page.
+  2. Customer selects filters (location, cuisine, etc.) and submits the search.
+  3. System retrieves matching restaurants and displays results.
+- **Alternative flows**:
+  - **Alternative flow 1**: No restaurants match the search criteria.
+  - **Alternative flow 2**: Missing or invalid input prompts an error message.
 
+---
+
+### **Use Case 3: Restaurant Details Page**
+- **Actors**: Customer
+- **Use case goal**: Allow users to view detailed information about a selected restaurant.
+- **Primary Actor**: Customer
+- **Preconditions**: Restaurant must be registered in the database.
+- **Basic flow**:
+  1. Customer selects a restaurant from the search results.
+  2. System displays the restaurant's details, including menu, operating hours, and customer reviews.
+- **Alternative flows**:
+  - **Alternative flow 1**: The selected restaurant has no available information (e.g., menu or reviews not found).
+
+---
+
+### **Use Case 4: Select Reservation**
+- **Actors**: Customer
+- **Use case goal**: Allow customers to select a reservation time for a chosen restaurant.
+- **Primary Actor**: Customer
+- **Preconditions**: Customer must be logged in, and restaurant availability must be known.
+- **Basic flow**:
+  1. Customer selects a restaurant and picks an available reservation time.
+  2. System confirms the reservation and sends a confirmation to the customer.
+- **Alternative flows**:
+  - **Alternative flow 1**: Customer cancels the reservation process.
+  - **Alternative flow 2**: Selected time slot is unavailable; the system suggests alternative slots.
+
+---
+### **Use Case 5: Cancel Reservation**
+- **Actors**: Customer
+- **Use case goal**: Enable customers to cancel existing reservations.
+- **Primary Actor**: Customer
+- **Preconditions**: A valid reservation must exist.
+- **Basic flow**:
+  1. Customer selects a future reservation.
+  2. Customer cancels the reservation.
+  3. System updates the reservation status.
+- **Alternative flows**:
+  - **Alternative flow 1**: Reservation is not cancellable (e.g., within a restricted time window).
+  
+---
+
+### **Use Case 6: Leave a Review**
+- **Actors**: Customer
+- **Use case goal**: Enable customers to leave reviews for restaurants they have visited.
+- **Primary Actor**: Customer
+- **Preconditions**: Customer must have made a reservation.
+- **Basic flow**:
+  1. Customer selects a past reservation.
+  2. Customer submits a review and rating for the restaurant.
+  3. System saves the review and updates the restaurant’s rating.
+- **Alternative flows**:
+  - **Alternative flow 1**: The customer cancels before submitting the review.
+
+---

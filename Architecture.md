@@ -1,42 +1,68 @@
-# Architecture.md
-
 ## Class Diagram 1: **Reservation System Entities**
 
 ### Description:
-This class diagram illustrates the main entities involved in the **BookNow reservation system**, including 
-`Customer`, `Restaurant`, and `Reservation`. Each class represents a key entity in the system, containing 
-attributes that define their properties. The relationships between these entities are represented with 
-association lines.
-
-- **Customer**: Represents the user of the system who can create reservations and log in. Attributes include:
-    - `id`: Unique identifier for each customer.
-    - `username`: The name the customer uses to log in.
-    - `password`: The customer's login password.
-    - `phoneNumber`: The customer's contact number.
-
-- **Restaurant**: Represents a restaurant where reservations can be made. Attributes include:
-    - `id`: Unique identifier for each restaurant.
-    - `name`: Name of the restaurant.
-    - `location`: Location of the restaurant.
-    - `imagePath`: Path to the restaurant's image.
-    - `description`: A brief description of the restaurant.
-    - `rating`: The restaurant's overall rating.
-    - `numberOfReviews`: The number of reviews submitted for the restaurant.
-    - `price`: Price range of the restaurant.
-
-- **Reservation**: Represents a reservation made by a `Customer` at a `Restaurant`. Attributes include:
-    - `reservationId`: Unique identifier for the reservation.
-    - `customer`: Links to the `Customer` who made the reservation.
-    - `restaurant`: Links to the `Restaurant` where the reservation was made.
-    - `reservationDateTime`: Date and time of the reservation.
-    - `numberOfGuests`: The total number of guests included in the reservation.
-
-### Diagram:
-![Class Diagram](/Diagrams/ClassDiagram1.jpg)
-
-This diagram shows how customers, restaurants, and reservations interact in the system. Each `Reservation` is linked to a specific `Customer` and `Restaurant`, reflecting the relationships between the entities in the application.
+This class diagram illustrates the main entities involved in the **BookNow reservation system**, including `Customer`, `Restaurant`, and `Reservation`. Each class represents a key entity in the system, containing attributes that define their properties and methods for interacting with those properties.
 
 ---
+
+#### 1. **Customer**
+- **Description**: Represents a user of the system who can create reservations and log in.
+- **Attributes**:
+    - `String username`: The username of the customer.
+    - `String password`: The password of the customer.
+- **Constructor**:
+    - `Customer(String username, String password)`: Initializes a new `Customer` object with the provided username and password.
+- **Methods**:
+    - `getUsername()`: Returns the username of the customer.
+    - `setUsername(String username)`: Sets the username of the customer.
+    - `getPassword()`: Returns the password of the customer.
+    - `setPassword(String password)`: Sets the password of the customer.
+
+---
+
+#### 2. **Restaurant**
+- **Description**: Represents a restaurant where customers can make reservations.
+- **Attributes**:
+    - `String name`: The name of the restaurant.
+    - `String location`: The location of the restaurant.
+    - `float rating`: The rating of the restaurant (on a scale from 1 to 5).
+    - `float price`: The price range of the restaurant.
+- **Constructor**:
+    - `Restaurant(String name, String location, float rating, float price)`: Initializes a new `Restaurant` object with the provided name, location, rating, and price.
+- **Methods**:
+    - `getName()`: Returns the name of the restaurant.
+    - `setName(String name)`: Sets the name of the restaurant.
+    - `getLocation()`: Returns the location of the restaurant.
+    - `setLocation(String location)`: Sets the location of the restaurant.
+    - `getRating()`: Returns the rating of the restaurant.
+    - `setRating(float rating)`: Sets the rating of the restaurant.
+    - `getPrice()`: Returns the price range of the restaurant.
+    - `setPrice(float price)`: Sets the price range of the restaurant.
+
+---
+
+#### 3. **Reservation**
+- **Description**: Represents a reservation made by a customer at a restaurant for a specific date and time.
+- **Attributes**:
+    - `Customer customer`: The customer who made the reservation.
+    - `Restaurant restaurant`: The restaurant where the reservation is made.
+    - `LocalDateTime reservationDateTime`: The date and time of the reservation.
+    - `int numberOfGuests`: The number of guests for the reservation.
+- **Constructor**:
+    - `Reservation(Customer customer, Restaurant restaurant, LocalDateTime reservationDateTime, int numberOfGuests)`: Initializes a new `Reservation` object with the provided customer, restaurant, reservation date and time, and the number of guests.
+- **Methods**:
+    - `getCustomer()`: Returns the customer associated with the reservation.
+    - `setCustomer(Customer customer)`: Sets the customer for the reservation.
+    - `getRestaurant()`: Returns the restaurant associated with the reservation.
+    - `setRestaurant(Restaurant restaurant)`: Sets the restaurant for the reservation.
+    - `getReservationDateTime()`: Returns the date and time of the reservation.
+    - `setReservationDateTime(LocalDateTime reservationDateTime)`: Sets the date and time of the reservation.
+    - `getNumberOfGuests()`: Returns the number of guests for the reservation.
+    - `setNumberOfGuests(int numberOfGuests)`: Sets the number of guests for the reservation.
+
+![Class Diagram](Diagrams/ClassDiagram1.jpg)
+---
+
 # Class Diagram 2: Reservation System (MVC Architecture)
 
 ## Description:
@@ -45,142 +71,184 @@ This class diagram extends the **BookNow reservation system** to follow the **Mo
 ### **Models**:
 The **Model** layer represents the core entities of the system. This layer contains the following classes:
 
-1. **Customer**
-  - **Attributes**:
-    - `id: int` - Unique identifier for the customer.
-    - `username: String` - Username for login.
-    - `password: String` - Customer's password.
-    - `phoneNumber: String` - Customer's phone number.
-  - **Methods**:
-    - `getId(): int` - Returns the unique identifier of the customer.
-    - `setId(int id): void` - Sets the customer's unique identifier.
-    - `getUsername(): String` - Returns the username of the customer.
-    - `setUsername(String username): void` - Sets the username for the customer.
-    - `getPassword(): String` - Returns the password of the customer.
-    - `setPassword(String password): void` - Sets the customer's password.
-    - `getPhoneNumber(): String` - Returns the customer's phone number.
-    - `setPhoneNumber(String phoneNumber): void` - Sets the customer's phone number.
+---
 
-2. **Restaurant**
-  - **Attributes**:
-    - `id: int` - Unique identifier for each restaurant.
-    - `name: String` - Name of the restaurant.
-    - `location: String` - Location of the restaurant.
-    - `imagePath: String` - Path to the restaurant image.
-    - `description: String` - Brief description of the restaurant.
-    - `rating: float` - Rating of the restaurant.
-    - `numberOfReviews: int` - Total number of reviews.
-    - `price: float` - Price range of the restaurant.
-  - **Methods**:
-    - `getId(): int` - Returns the unique identifier of the restaurant.
-    - `setId(int id): void` - Sets the restaurant's unique identifier.
-    - `getName(): String` - Returns the name of the restaurant.
-    - `setName(String name): void` - Sets the name for the restaurant.
-    - `getLocation(): String` - Returns the location of the restaurant.
-    - `setLocation(String location): void` - Sets the location for the restaurant.
-    - `getImagePath(): String` - Returns the path to the restaurant's image.
-    - `setImagePath(String imagePath): void` - Sets the path to the restaurant's image.
-    - `getDescription(): String` - Returns the description of the restaurant.
-    - `setDescription(String description): void` - Sets the description for the restaurant.
-    - `getRating(): float` - Returns the rating of the restaurant.
-    - `setRating(float rating): void` - Sets the rating for the restaurant.
-    - `getNumberOfReviews(): int` - Returns the total number of reviews for the restaurant.
-    - `setNumberOfReviews(int numberOfReviews): void` - Sets the number of reviews for the restaurant.
-    - `getPrice(): float` - Returns the price range of the restaurant.
-    - `setPrice(float price): void` - Sets the price range for the restaurant.
+#### 1. **Customer**
+- **Attributes**:
+    - `String username`: The username of the customer.
+    - `String password`: The password of the customer.
+- **Constructor**:
+    - `Customer(String username, String password)`: Initializes a new `Customer` object with the provided username and password.
+- **Methods**:
+    - `getUsername()`: Returns the username of the customer.
+    - `setUsername(String username)`: Sets the username of the customer.
+    - `getPassword()`: Returns the password of the customer.
+    - `setPassword(String password)`: Sets the password of the customer.
+---
 
-3. **Reservation**
-  - **Attributes**:
-    - `reservationId: int` - Unique reservation ID.
-    - `customer: Customer` - Customer who made the reservation.
-    - `restaurant: Restaurant` - Restaurant where the reservation is made.
-    - `reservationDateTime: LocalDateTime` - Date and time of the reservation.
-    - `numberOfGuests: int` - Number of guests for the reservation.
-  - **Methods**:
-    - `getReservationId(): int` - Returns the unique reservation ID.
-    - `setReservationId(int reservationId): void` - Sets the reservation ID.
-    - `getCustomer(): Customer` - Returns the customer associated with the reservation.
-    - `setCustomer(Customer customer): void` - Sets the customer for the reservation.
-    - `getRestaurant(): Restaurant` - Returns the restaurant associated with the reservation.
-    - `setRestaurant(Restaurant restaurant): void` - Sets the restaurant for the reservation.
-    - `getReservationDateTime(): LocalDateTime` - Returns the date and time of the reservation.
-    - `setReservationDateTime(LocalDateTime reservationDateTime): void` - Sets the date and time of the reservation.
-    - `getNumberOfGuests(): int` - Returns the number of guests for the reservation.
-    - `setNumberOfGuests(int numberOfGuests): void` - Sets the number of guests for the reservation.
+#### 2. **Restaurant**
+- **Attributes**:
+    - `String name`: The name of the restaurant.
+    - `String location`: The location of the restaurant.
+    - `float rating`: The rating of the restaurant (on a scale from 1 to 5).
+    - `float price`: The price range of the restaurant.
+- **Constructor**:
+    - `Restaurant(String name, String location, float rating, float price)`: Initializes a new `Restaurant` object with the provided name, location, rating, and price.
+- **Methods**:
+    - `getName()`: Returns the name of the restaurant.
+    - `setName(String name)`: Sets the name of the restaurant.
+    - `getLocation()`: Returns the location of the restaurant.
+    - `setLocation(String location)`: Sets the location of the restaurant.
+    - `getRating()`: Returns the rating of the restaurant.
+    - `setRating(float rating)`: Sets the rating of the restaurant.
+    - `getPrice()`: Returns the price range of the restaurant.
+    - `setPrice(float price)`: Sets the price range of the restaurant.
+
+---
+
+#### 3. **Reservation**
+- **Attributes**:
+    - `Customer customer`: The customer who made the reservation.
+    - `Restaurant restaurant`: The restaurant where the reservation is made.
+    - `LocalDateTime reservationDateTime`: The date and time of the reservation.
+    - `int numberOfGuests`: The number of guests for the reservation.
+- **Constructor**:
+    - `Reservation(Customer customer, Restaurant restaurant, LocalDateTime reservationDateTime, int numberOfGuests)`: Initializes a new `Reservation` object with the provided customer, restaurant, reservation date and time, and the number of guests.
+- **Methods**:
+    - `getCustomer()`: Returns the customer associated with the reservation.
+    - `setCustomer(Customer customer)`: Sets the customer for the reservation.
+    - `getRestaurant()`: Returns the restaurant associated with the reservation.
+    - `setRestaurant(Restaurant restaurant)`: Sets the restaurant for the reservation.
+    - `getReservationDateTime()`: Returns the date and time of the reservation.
+    - `setReservationDateTime(LocalDateTime reservationDateTime)`: Sets the date and time of the reservation.
+    - `getNumberOfGuests()`: Returns the number of guests for the reservation.
+    - `setNumberOfGuests(int numberOfGuests)`: Sets the number of guests for the reservation.
+
+---
 
 ### **Views**:
 The **View** layer consists of the user interface (UI) for interacting with the system. These are defined using JavaFX and FXML files:
 - **LoginView**: The UI for users to log in.
 - **CreateAccountView**: The UI for new users to create an account.
 - **BookNowView**: The main UI where users search for restaurants and create reservations.
+- **RestaurantDetailsView**: The UI for displaying detailed information about a selected restaurant.
+
+---
 
 ### **Controllers**:
 The **Controller** layer acts as the intermediary between the views and models. Each controller listens to events in the UI, interacts with the models, and updates the view:
-1. **LoginController**
-  - **Methods**:
-    - `onLoginButtonAction()`: Handles the click event of the login button and authenticates the user.
-    - `onCreateAccountButtonAction()`: Redirects users to the account creation page.
 
-2. **CreateAccountController**
-  - **Methods**:
-    - `onCreateAccountButtonAction()`: Handles the account creation logic and communicates with the CustomerService to add the new user.
-    - `onButtonLogin()`: Redirects users to the login page.
+1. **LoginController**:
+    - **Fields**:
+        - `TextField tf_username`: Input field for the username.
+        - `PasswordField pf_password`: Input field for the password.
+        - `AuthenticationService authenticationService`: Service for handling authentication logic.
+    - **Methods**:
+        - `onLoginButtonAction()`: Handles the login button click event. Validates input and calls `AuthenticationService` to authenticate the user.
+        - `validateInput()`: Validates that both the username and password fields are filled in.
+        - `handleLoginResult(boolean isAuthenticated)`: Displays either a success or error alert based on whether the authentication was successful or not.
 
-3. **BookNowController**
-  - **Methods**:
-    - `onGuestButtonAction()`: Opens the guest selection popup.
-    - `onSearchButtonClick()`: Fetches and displays restaurants based on the selected filters.
-    - `increaseAdults()`: Increases the count of adults.
-    - `decreaseAdults()`: Decreases the count of adults.
-    - `increaseChildren()`: Increases the count of children.
-    - `decreaseChildren()`: Decreases the count of children.
-    - `onConfirmReservation()`: Confirms the reservation and records it.
-    - `onViewReservationHistory()`: Fetches and displays past reservations for the customer.
-    - `onLeaveReview()`: Handles leaving a review for a selected restaurant.
-    - `onCancelReservation()`: Handles the cancellation of a reservation.
+2. **CreateAccountController**:
+    - **Fields**:
+        - `TextField tf_Username`: Input field for the username.
+        - `PasswordField pf_Password`: Input field for the password.
+        - `PasswordField pf_ConfirmPassword`: Input field for confirming the password.
+        - `CustomerService customerService`: Service for handling customer-related operations.
+    - **Methods**:
+        - `onCreateAccountButtonAction()`: Handles the "Create New Account" button click event. Validates input, checks for existing usernames, and creates a new account if all conditions are met.
+        - `onButton_Login()`: Handles the "Log in" button click event. Provides a placeholder for redirecting to the login view.
+        - `loadLoginView()`: Placeholder method for loading the login view after successful account creation.
+
+3. **BookNowController**:
+    - **Fields**:
+        - `Label lbl_welcome`: Displays the welcome message.
+        - `ComboBox<String> locationComboBox`: Dropdown for selecting the restaurant location.
+        - `ComboBox<String> cb_cuisineType`: Dropdown for selecting the type of cuisine.
+        - `ComboBox<String> cb_rating`: Dropdown for selecting restaurant rating.
+        - `ComboBox<String> cb_priceRange`: Dropdown for selecting the price range.
+        - `DatePicker checkInDate`: Date picker for selecting the reservation date.
+        - `Button guestButton`: Button to open guest selection options.
+        - `VBox restaurantListVBox`: Container for displaying the list of restaurants.
+        - `VBox guestSelectionVBox`: Container for selecting the number of adults and children.
+        - `Label adultsLabel`: Displays the number of adults.
+        - `Label childrenLabel`: Displays the number of children.
+        - `VBox availabilityVBox`: Container for displaying available times for reservations.
+        - `Button leaveReviewButton`: Button to leave a review for the restaurant.
+        - `ComboBox<Restaurant> restaurantComboBox`: Dropdown for selecting a restaurant.
+        - `VBox reservationHistoryVBox`: Container for displaying reservation history.
+        - `TextArea reviewTextArea`: Text area for entering a review.
+        - `ComboBox<String> cb_reviewRating`: Dropdown for selecting a review rating.
+        - `ComboBox<String> cb_reservationToCancel`: Dropdown for selecting a reservation to cancel.
+        - `RestaurantService restaurantService`: Service for handling restaurant-related logic.
+        - `ReservationService reservationService`: Service for handling reservation-related logic.
+    - **Methods**:
+        - `onGuestButtonAction()`: Opens the guest selection popup.
+        - `onSearchButtonClick()`: Fetches and displays restaurants based on the selected filters.
+        - `onNoRestaurantsFound()`: Displays an alert if no restaurants match the search criteria.
+        - `onRestaurantSelected()`: Handles restaurant selection and fetches available times.
+        - `onConfirmReservation()`: Confirms the reservation and records it.
+        - `onViewReservationHistory()`: Fetches and displays past reservations for the customer.
+        - `onSubmitReview()`: Handles submitting a review for a selected restaurant.
+        - `onCancelReservation()`: Handles the cancellation of a reservation.
+        - `increaseAdults()`: Increases the count of adults.
+        - `decreaseAdults()`: Decreases the count of adults.
+        - `increaseChildren()`: Increases the count of children.
+        - `decreaseChildren()`: Decreases the count of children.
+        - `displaySearchRestaurants(List<Restaurant> availableRestaurants)`: Displays the list of searched restaurants in the UI.
+        - `displayRestaurantDetails(Restaurant restaurant)`: Displays the detailed information for the selected restaurant.
 
 ### **Services**:
 The system uses services to manage business logic and interaction with the models:
-1. **AuthenticationService**
-  - **Methods**:
-    - `authenticate(String username, String password): boolean` - Authenticates the user with the provided credentials.
 
-2. **CustomerService**
-  - **Methods**:
-    - `addCustomer(Customer customer): boolean` - Adds a new customer to the system.
+1. **AuthenticationService**:
+    - **Methods**:
+        - `authenticate(String username, String password)`: Authenticates a user by checking their credentials against the database.
+            - Establishes a connection to the database.
+            - Executes an SQL query to find a user with the provided username and password.
+            - Returns `true` if a matching user is found, `false` if not.
+        - The method also includes error handling to manage database connection failures.
 
-  # RestaurantService
-- **Methods**:
-  - `getRestaurantsByLocation(String location): List<Restaurant>` - Retrieves a list of restaurants by location.
-  - `getRestaurantsByCuisine(String cuisine): List<Restaurant>` - Retrieves a list of restaurants by cuisine.
-  - `getRestaurantsByRating(int rating): List<Restaurant>` - Retrieves a list of restaurants by rating.
-  - `getRestaurantsByPriceRange(String priceRange): List<Restaurant>` - Retrieves a list of restaurants by price range.
-  - `submitReview(Restaurant restaurant, String review, int rating): boolean` - Submits a review for a restaurant and returns a success status.
-  - `searchRestaurants(String location, String cuisine, LocalDateTime time): List<Restaurant>` - Searches for restaurants based on location, cuisine, and time.
+2. **CustomerService**:
+    - **Fields**:
+        - `List<Customer> customerDatabase`: A simulated in-memory database that stores a list of customers.
+    - **Methods**:
+        - `addCustomer(Customer customer)`: Adds a new customer to the simulated database after verifying that the username is not already taken.
+        - `isUsernameTaken(String username)`: Checks if the provided username already exists in the customer database.
 
-# ReservationService
-- **Methods**:
-  - `selectReservation(Reservation reservation): boolean` - Selects a reservation and returns a success status.
-  - `getReservationsByCustomer(Customer customer): List<Reservation>` - Retrieves a list of reservations for a given customer.
-  - `getAvailableTimes(Restaurant restaurant): List<LocalDateTime>` - Retrieves available reservation times for a restaurant.
-  - `cancelReservation(Reservation reservation): boolean` - Cancels a reservation and returns a success status.
+3. **ReservationService**:
+    - **Methods**:
+        - `confirmReservation(Reservation reservation)`: Confirms and records a reservation with details such as customer, restaurant, and time.
+        - `getReservationsByCustomer(Customer customer)`: Fetches the list of reservations made by a specific customer.
+        - `getAvailableTimes(Restaurant restaurant)`: Retrieves the available reservation time slots for a specific restaurant.
+        - `cancelReservation(String reservationId)`: Cancels an existing reservation based on the provided reservation ID.
 
+4. **RestaurantService**:
+    - **Methods**:
+        - `getRestaurantsByLocation(String location)`: Retrieves a list of restaurants based on their location.
+        - `getRestaurantsByCuisine(String cuisine)`: Fetches a list of restaurants based on their cuisine type.
+        - `getRestaurantsByRating(int rating)`: Retrieves a list of restaurants based on their rating.
+        - `getRestaurantsByPriceRange(String priceRange)`: Fetches a list of restaurants based on their price range.
+        - `searchRestaurants(String location, String cuisine, String time)`: Searches and returns a list of restaurants based on location, cuisine type, and reservation time.
+        - `submitReview(Restaurant restaurant, String review, int rating)`: Allows users to submit a review for a restaurant, recording their rating and review content.
+
+---
 
 ### **Utilities**:
 Utilities are responsible for handling shared services, such as alerting users and managing the database connection.
-1. Alerts
-- **Methods**:
-  - `showInfoAlert(String title, String message): void` - Displays an informational alert with the specified title and message.
-  - `showErrorAlert(String title, String message): void` - Displays an error alert with the specified title and message.
-  - `showAlert(Alert.AlertType alertType, String title, String message): void` - A general method to show an alert of a specific type (INFORMATION or ERROR) with the given title and message.
+
+1. **Alerts**
+    - **Methods**:
+        - `showInfoAlert(String title, String message): void` - Displays an informational alert with the specified title and message.
+        - `showErrorAlert(String title, String message): void` - Displays an error alert with the specified title and message.
+        - `showAlert(Alert.AlertType alertType, String title, String message): void` - A general method to show an alert of a specific type (INFORMATION or ERROR) with the given title and message.
 
 2. **DatabaseConnection**
-  - **Attributes**:
-    - `url: String` - URL of the database.
-    - `username: String` - Username for the database.
-    - `password: String` - Password for the database.
-  - **Methods**:
-    - `connect(): Connection` - Establishes a connection to the database.
+    - **Attributes**:
+        - `url: String` - URL of the database.
+        - `username: String` - Username for the database.
+        - `password: String` - Password for the database.
+    - **Methods**:
+        - `connect(): Connection` - Establishes a connection to the database.
 
 ### Diagram:
 ![Class Diagram](Diagrams/ClassDiagram2.jpeg)
@@ -190,65 +258,104 @@ This diagram illustrates the relationships between models, views, controllers, s
 ---
 
 ### Example: Interaction Flow
-1. **Login Flow**:
-  - The user enters their credentials in the **LoginView**. The **LoginController** validates the credentials through the **AuthenticationService**. If valid, the user is redirected to the **BookNowView**; otherwise, an error alert is displayed.
+
+1. **User Authentication Flow**:
+    - **Step 1**: If the user is a new user:
+        - The user navigates to the **CreateAccountView** and enters their desired username and password.
+        - The **CreateAccountController** calls `onCreateAccountButtonAction()` to validate the input.
+        - If the username is available and the password meets requirements, the account is created using `addCustomer(Customer customer)` from the **CustomerService**.
+        - The user is then automatically logged in and redirected to the **BookNowView**.
+    - **Step 2**: If the user is an existing user:
+        - The user navigates to the **LoginView** and enters their username and password.
+        - The **LoginController** calls `onLoginButtonAction()` to validate the credentials using `authenticate(String username, String password)` from the **AuthenticationService**.
+        - If the credentials are valid, the user is redirected to the **BookNowView**.
+        - If the credentials are invalid, an error alert is displayed using the **Alerts** utility, prompting the user to re-enter their credentials.
 
 2. **Restaurant Search and Reservation Flow**:
-  - In the **BookNowView**, the user enters search criteria (location, cuisine, etc.) and clicks the search button. The **BookNowController** retrieves the matching restaurants from the **RestaurantService** and displays them. The user can then select a restaurant and create a reservation, which is processed by the **ReservationService**.
+    - **Step 1**: In the **BookNowView**, the user enters search criteria, such as location, cuisine type, and the number of guests.
+    - **Step 2**: The user clicks the search button, triggering the **BookNowController** to call `onSearchButtonClick()`.
+    - **Step 3**: The **BookNowController** uses the search filters and interacts with the **RestaurantService** to retrieve a list of matching restaurants by calling `searchRestaurants(location, cuisine, time)`.
+    - **Step 4**: The matching restaurants are displayed in the **BookNowView**, showing the available reservation times and details about each restaurant.
+    - **Step 5**: The user selects a restaurant from the list to view more details, which triggers `displayRestaurantDetails(Restaurant restaurant)` in the **BookNowController**.
+    - **Step 6**: The **BookNowController** fetches the restaurant details and updates the **RestaurantDetailsView** with information such as the menu, operating hours, and customer reviews.
+    - **Step 7**: The user proceeds to choose a date and time for the reservation.
+    - **Step 8**: The **BookNowController** calls `onConfirmReservation()` to confirm the reservation, interacting with the **ReservationService** as needed.
+    - **Step 9**: After confirming the reservation, a success message is displayed to the user.
 
----
+3. **Cancel Reservation Flow**:
+    - **Step 1**: The user selects a future reservation from their options in the **BookNowView**.
+    - **Step 2**: The user clicks the "Cancel Reservation" button, triggering the **BookNowController** to call `onCancelReservation()`.
+    - **Step 3**: The **ReservationService** is invoked to cancel the selected reservation.
+    - **Step 4**: If the cancellation is successful, the **BookNowView** is updated to reflect the cancellation, and a success message is shown to the user.
+
+4. **Review Flow**:
+    - **Step 1**: After attending a reservation, the user is prompted to leave a review in the **BookNowView**.
+    - **Step 2**: The user writes their review and selects a rating for the restaurant.
+    - **Step 3**: The **BookNowController** interacts with the **RestaurantService** to submit the review and rating by calling `submitReview(restaurant, review, rating)`.
+    - **Step 4**: Once submitted, the **BookNowView** displays a confirmation, and the restaurant's overall rating is updated in the system.
+
 
 ### Adherence to MVC Principles:
 1. **Separation of Concerns**:
-  - The system is divided into distinct layers (Model, View, Controller), each handling a specific part of the system logic.
+- The system is divided into distinct layers (Model, View, Controller), each handling a specific part of the system logic.
 2. **High Cohesion, Low Coupling**:
-  - The components are cohesive and interact minimally with one another. The Views are separate from the Models, and all interactions occur through the Controllers.
+- The components are cohesive and interact minimally with one another. The Views are separate from the Models, and all interactions occur through the Controllers.
 3. **Controller as the Mediator**:
-  - All communication between Views and Models occurs via the Controllers, ensuring modularity and easy updates.
-
+- All communication between Views and Models occurs via the Controllers, ensuring modularity and easy updates.
 
 # Sequence Diagram for Customer Login and Restaurant Search
 
 ## Overview
-In this milestone, we focus on the use case where a customer logs in and searches for restaurants. This sequence diagram captures the interactions between various components in the system, illustrating the flow of messages and the relationships between the classes.
+This sequence diagram illustrates the use case where a customer logs in and searches for restaurants. It captures the flow of messages and interactions between the system components, demonstrating how different classes work together to fulfill this functionality.
 
 ## Use Case
-The most complicated use case selected from Milestone 2 involves the following steps:
-1. **Customer initiates login.**
-2. **Login processing and validation.**
-3. **Successful login triggers the restaurant search.**
-4. **Customer selects search criteria.**
-5. **Fetch available restaurants based on selected criteria.**
-6. **Display results to the customer.**
+The following steps outline the process for logging in and searching for restaurants:
+1. **Customer initiates login** by clicking the login button (`onLoginButtonAction()`).
+2. **Login processing and validation** occurs in the `AuthenticationService` via the `authenticate(username, password)` method.
+3. If login is successful, the **LoginController** triggers the restaurant search by calling `onSearchButtonClick()` in the **BookNowController**.
+4. The **Customer** selects search criteria (location, cuisine, time).
+5. The **BookNowController** calls `searchRestaurants(location, cuisine, time)` in the **RestaurantService** to fetch available restaurants based on the selected criteria.
+6. The system retrieves matching restaurants and displays the search results to the customer.
 
 ## Sequence Diagram
 
 ![Sequence Diagram](Diagrams/SequenceDiagram.jpg)
 
-# Sequence Diagram
+### Participants:
+- **Customer**: The user interacting with the application.
+- **LoginController**: Handles login functionality and user input.
+- **AuthenticationService**: Responsible for validating user credentials.
+- **BookNowController**: Manages the main application flow after successful login and handles restaurant searches.
+- **RestaurantService**: Handles restaurant data retrieval and filtering based on search criteria.
 
-- **Customer**: The user who interacts with the application.
+---
 
-- **LoginController**: Handles the login process.
-  - Calls `onLoginButtonAction()` when the customer initiates a login.
-  - Invokes `authenticate(username, password)` from the `AuthenticationService` to verify credentials.
+### 1. **LoginController**
+- **onLoginButtonAction()**:
+    - Handles the login button click event, triggering the login process.
+    - Calls `authenticate(username, password)` from `AuthenticationService` to validate the credentials.
 
-- **AuthenticationService**: Verifies the provided credentials.
-  - Calls `authenticate(username, password)` to check the validity of the login.
-  - Returns `authenticationResult` indicating success or failure.
+### 2. **AuthenticationService**
+- **authenticate(String username, String password)**:
+    - Validates user credentials by checking them against the database.
+    - Returns a boolean indicating success (`true`) or failure (`false`).
 
-- **BookNowController**: Manages the main application flow.
-  - If login is successful, it calls `displayLoginResult(success)`.
-  - If login fails, it invokes `Alerts(title: message)` to notify the user.
+### 3. **BookNowController**
+- **onSearchButtonClick()**:
+    - After a successful login, this method allows the customer to search for restaurants.
+    - Calls `RestaurantService.searchRestaurants()` with the customer’s selected search criteria (location, cuisine, time).
 
-- **Search Button Action**: After a successful login, the customer can search for restaurants.
-  - Calls `onSearchButtonClick()` to initiate the search process.
+- **displayRestaurants(List<Restaurant> availableRestaurantsList)**:
+    - This method is responsible for updating the UI with the search results.
 
-- **RestaurantService**: Responsible for fetching restaurants.
-  - The method `searchRestaurants(location, cuisine, time)` is called with the selected criteria.
-  - Calls `getRestaurantsByLocation(location)` and `getRestaurantsByCuisine(cuisine)` to fetch available restaurants based on the selected filters.
+### 4. **RestaurantService**
+- **searchRestaurants(String location, String cuisine, String time)**:
+    - Fetches the list of restaurants matching the selected search criteria.
 
-- **Display Results**: Finally, the `BookNowController` calls `displayRestaurants(availableRestaurantsList)` to update the view with the list of available restaurants based on the search criteria.
+- **getRestaurantsByLocation(String location)**, **getRestaurantsByCuisine(String cuisine)**:
+    - These methods are used internally by `searchRestaurants()` to retrieve restaurants based on specific filters (location and cuisine).
+
+---
 
 ## Conclusion
-This sequence diagram effectively illustrates the interactions and flow of control during the customer login and restaurant search process. It demonstrates how the MVC architecture components collaborate to handle user actions, providing a clear understanding of the system's behavior in this use case.
+This sequence diagram aligns with the methods and flow described my code. It includes all relevant interactions for **login**, **restaurant search**, and **displaying search results**. The MVC architecture is clearly illustrated, showing how controllers, services, and models collaborate to handle user requests.

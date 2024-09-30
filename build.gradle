@@ -26,7 +26,7 @@ tasks.withType(JavaCompile) {
 
 application {
   mainModule = 'com.metrostate.edu.booknow'
-  mainClass = 'com.metrostate.edu.booknow.HelloApplication'
+  mainClass = 'com.metrostate.edu.booknow.BookNow'
 }
 
 javafx {
