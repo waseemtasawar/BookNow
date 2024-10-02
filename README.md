@@ -6,6 +6,6 @@ number of guests. They can search for nearby restaurants, view review counts, ex
 slots, and make reservations. Additionally, users can manage their bookings with ease.
 
 ## Developers
-
+Hello Brother
 - Jimmie Xiong <jimmie.xiong@my.metrostate.edu>
 - Hao Le Tran <hao.tran@my.metrostate.edu>
